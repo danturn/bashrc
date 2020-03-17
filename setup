@@ -4,6 +4,14 @@ sudo echo "a prompt for sudo" >/dev/null
 sudo apt update
 sudo apt install python3-dev python3-pip python3-setuptools -y
 sudo pip3 install thefuck
+wget https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz
+tar -xzvf hub-linux-amd64-2.14.2.tgz
+cd ./hub-linux-amd64-2.14.2
+sudo ./install
+cd ..
+rm -rf ./hub-linux-amd64-2.14.2
+rm  ./hub-linux-amd64-2.14.2.tgz
+
 
 mkdir -p ~/.bashrc.d
 echo """
@@ -13,6 +21,7 @@ echo """
      }
      export PS1='\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;35m\]\$(parse_git_branch)\[\033[00m\]\$ '
      eval $(thefuck --alias)
+     eval "$(hub alias -s)"
      """ > ~/.bashrc.d/dan
 
 
