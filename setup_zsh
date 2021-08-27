@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+sudo echo "a prompt for sudo" >/dev/null
+brew install thefuck
+brew install gh
+
+cat <<- 'EOF' > ~/.zshrc
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats '(%b)'
+
+# Set up the prompt (with git branch name)
+setopt PROMPT_SUBST
+PROMPT='%F{118}%n%F{119}@%F{120}%m%F{121}:%F{122}${PWD/#$HOME/~} %F{123}${vcs_info_msg_0_}%F{219}$ %f'
+
+eval $(thefuck --alias)
+EOF
+
+echo "--------------------------------------------------------------------------------------"
+echo "You need to resource your .zshrc file, either type '. ~/.zshrc' or logout and back in"
+echo "--------------------------------------------------------------------------------------"
