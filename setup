@@ -35,6 +35,8 @@ echo """
      eval $(thefuck --alias)
      eval "$(hub alias -s)"
      alias p='cd /home/dan/src/platform'
+     export PATH=/home/dan/src/platform/assets/node_modules/.bin:$PATH
+     export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
      """ > ~/.bashrc.d/dan
 
 
