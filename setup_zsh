@@ -18,7 +18,11 @@ zstyle ':vcs_info:git:*' formats '(%b)'
 setopt PROMPT_SUBST
 PROMPT='%F{118}%n%F{119}@%F{120}%m%F{121}:%F{122}${PWD/#$HOME/~} %F{123}${vcs_info_msg_0_}%F{219}$ %f'
 
+alias p='cd ~/src/platform'
 eval $(thefuck --alias)
+
+export EDITOR=vim
+
 EOF
 
 echo "--------------------------------------------------------------------------------------"
