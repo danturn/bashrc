@@ -21,6 +21,7 @@ PROMPT='%F{118}%n%F{119}@%F{120}%m%F{121}:%F{122}${PWD/#$HOME/~} %F{123}${vcs_in
 alias p='cd ~/src/platform'
 eval $(thefuck --alias)
 
+export ERL_AFLAGS="-kernel shell_history enabled"
 export EDITOR=vim
 
 EOF
