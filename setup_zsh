@@ -2,9 +2,22 @@
 
 set -e
 
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/dan/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/dan/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 sudo echo "a prompt for sudo" >/dev/null
 brew install thefuck
 brew install gh
+
+# Create the folder structure
+mkdir -p ~/.zsh
+cd ~/.zsh
+
+# Download the scripts
+curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 
 cat <<- 'EOF' > ~/.zshrc
 # Load version control information
@@ -23,6 +36,12 @@ eval $(thefuck --alias)
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 export EDITOR=vim
+
+# Load Git completion
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
 
 EOF
 
