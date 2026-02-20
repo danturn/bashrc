@@ -7,19 +7,11 @@ echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/dan/.zprofile
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/dan/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-sudo echo "a prompt for sudo" >/dev/null
-brew install thefuck
+brew install git
 brew install gh
 
-# Create the folder structure
-mkdir -p ~/.zsh
-cd ~/.zsh
-
-# Download the scripts
-curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-
 cat <<- 'EOF' > ~/.zshrc
+export PATH="/Users/dan/.local/bin:$PATH"
 # Load version control information
 autoload -Uz vcs_info
 precmd() { vcs_info }
@@ -31,15 +23,12 @@ zstyle ':vcs_info:git:*' formats '(%b)'
 setopt PROMPT_SUBST
 PROMPT='%F{118}%n%F{119}@%F{120}%m%F{121}:%F{122}${PWD/#$HOME/~} %F{123}${vcs_info_msg_0_}%F{219}$ %f'
 
-alias p='cd ~/src/platform'
-eval $(thefuck --alias)
+alias c='cd ~/src/sona/'
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 export EDITOR=vim
 
-# Load Git completion
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
+alias br="git branch --sort=-committerdate"
 
 autoload -Uz compinit && compinit
 
